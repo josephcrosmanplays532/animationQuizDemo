@@ -31,16 +31,19 @@ function myFunction() {
     x.className = "topnav";
   }
 }
-//Validation of Check Box
+//Validation of Radio Button 
 
 $(document).ready(function () {
+  // $("#playVedio").click()
+  // setTimeout(function(){
+  //   $("#video1").prop('muted', false);
+  // }, 500);
   $("#next").click(function () {
     var ans = $("input:radio[name ='question']:checked").val();
     if (currentQuestionIndex > 0) {
       if (!ans) {
         // alert("please check the answer");
-        swal({ type: "error", title: 'Error!', text: 'please check any one check box', confirmButtonClass: "btn-danger", confirmButtonText: 'OK' });
-
+        swal({ type: "error", title: 'Error!', text: 'Please check any one option to view next question!', confirmButtonClass: "btn-danger", confirmButtonText: 'OK' });
         return;
       } else {
         questions[currentQuestionIndex].answer = ans;
@@ -72,7 +75,12 @@ $(document).ready(function () {
     playQuestion();
   });
 });
+// start vedio
 
+function playVid() { 
+  var vid = document.getElementById("video1"); 
+  vid.play(); 
+} 
 function playQuestion() {
   var videoFile = './vedios/' + questions[currentQuestionIndex].videoPath;
   $('#divVideo video source').attr('src', videoFile);
@@ -85,6 +93,10 @@ function playQuestion() {
     console.log(d);
     optionsContent += '<label class="checkbox-inline" style="padding:10px"><input id="question" type="radio"  name="question" value="' + d + '"required> ' + d + '</label>';
   });
+  if(currentQuestionIndex){
+    $("#playVedio").hide();
+  }
+  console.log(currentQuestionIndex + "is the cirrent index");
 
   $("#optionsHolder").html(optionsContent);
 }
