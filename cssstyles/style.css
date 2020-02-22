@@ -1,3 +1,8 @@
+.tabresponsive{
+  width: 100%;
+  overflow-x: auto;
+}
+
 .centerAlign{
   text-align:center;
 }
@@ -39,6 +44,9 @@
   .topnav-right {
     float: right;
   }
+
+
+
   /* responsive screen */
   @media screen and (max-width: 600px) {
     .topnav a:not(:first-child) {display: none;}
@@ -94,3 +102,4 @@
 }
 
 }
+

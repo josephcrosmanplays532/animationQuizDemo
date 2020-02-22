@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)http://localhost:8000/vetprn_test/preceptorHandbook.php -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Users</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./Users_files/bootstrap.min.css">
+  <script src="./Users_files/jquery.min.js"></script>
+  <script src="./Users_files/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="./Users_files/font-awesome.min.css">
+  <link rel="stylesheet" href="./Users_files/patientData.css">
+  <link rel="stylesheet" type="text/css" href="./Users_files/datatables.min.css">
+  <link rel="stylesheet" href="./Users_files/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <script src="./Users_files/jquery.qtip.min.js"></script>
+  <link rel="stylesheet" href="./Users_files/jquery.qtip.min.css">
+<!-- Calender Scripts by self -->
+<link href="./Users_files/main.css" rel="stylesheet">
+  <link href="./Users_files/main(1).css" rel="stylesheet">
+  <link href="./Users_files/main(2).css" rel="stylesheet">
+
+  <script src="./Users_files/schedule_visit.js"></script>
+  <script src="./Users_files/main.js"></script>
+  <script src="./Users_files/main(3).js"></script>
+  <script src="./Users_files/main(4).js"></script>
+  <script src="./Users_files/main(5).js"></script>
+  <script src="./Users_files/moment.js"></script>
+  <script src="./Users_files/moment_timezone.js"></script>
+ <!-- Scripts By Self -->
+  <script src="./Users_files/approveRejectUser.js"></script>
+
+</head>
+
+<body data-gr-c-s-loaded="true">
+<div id="overlay" onclick="closeNav()"></div>
+
+<script>
+$("#HandbookLink a").on('click', function(event) {
+ event.preventDefault();
+ window.location = "./moduleProgress.php";
+});
+</script>
+<div id="mySidebar" class="sidenav" style="margin-top:0;z-index: 100000;background: linear-gradient(45deg, rgb(25, 35, 126), rgb(225, 228, 255));width:0px;transition:all 250ms ease 0s;">
+      <div style="padding:30px;background:#1a237e;color:white;">
+        <a class="text-align" href="http://localhost:8000/vetprn_test/home.php">   
+          <h3 style="font-weight: bold;">VETPRN</h3>
+        </a>
+      </div>
+    <div style="margin: 15px;">  
+              <a href="http://localhost:8000/vetprn_test/indexlogin.php"><span class="glyphicon glyphicon-home"></span> Index Looks Like</a>
+      <!-- <a href="./home.php"><span class="glyphicon glyphicon-home"></span> Home</a> -->
+        <a href="http://localhost:8000/vetprn_test/Orientation.php">Orientation</a>
+                <!-- <a href="./blog.php"> <i class="fa fa-blog"></i> Blogs</a> -->
+        <a href="http://localhost:8000/vetprn_test/goalsAndFaculty.php"> Goals &amp; Faculty</a>
+
+                  <!-- <a href="./calendar.php"><i class="fa fa-calendar-alt"></i> Calender</a> -->
+          <a href="http://localhost:8000/vetprn_test/preceptorResources.php"> Preceptor Resources</a>
+
+                  <a href="http://localhost:8000/vetprn_test/preceptorHandbook.php">Preceptor Handbook</a>
+                <a href="http://localhost:8000/vetprn_test/ModuleHome.php"> Modules </a>
+                <a href="http://localhost:8000/vetprn_test/rolesExpectations.php">Roles and Expectations</a>
+                <a href="http://localhost:8000/vetprn_test/sonUgBsn.php">  Curriculum And Course Descriptions</a>
+                  <a href="http://localhost:8000/vetprn_test/sonMissionVision.php">  SON Mission Vision Values</a>
+                     <a href="http://localhost:8000/vetprn_test/faq.php">  FAQ's</a>
+          
+</div> 
+
+</div>
+
+<script>
+function openNav() {
+
+  if( document.getElementById("mySidebar").style.width=="250px" || document.getElementById("mySidebar").style.width=="0px"){
+    document.getElementById("overlay").style.display = "block";
+    document.getElementById("mySidebar").style.width = "250px";
+    document.getElementById("mySidebar").classList.toggle('active');
+    // document.getElementById("main1").style.marginLeft = "0";
+  }else{
+    document.getElementById("mySidebar").style.width = "0px";
+    // document.getElementById("main1").style.marginLeft = "200px";
+  }
+}
+
+/* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+function closeNav() {
+  document.getElementById("overlay").style.display = "none";
+  document.getElementById("mySidebar").style.width = "0";
+  // document.getElementById("main1").style.marginLeft = "0";
+}
+</script>
+
+<div class="main">
+ 
+<nav class="navbar navbar-inverse navFill" style="z-index:2;position:fixed;top:0;width:100%;ss">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      <li><a href="javascript:openNav()">  <span class="glyphicon glyphicon-align-justify"></span></a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+       <li><a data-toggle="collapse" href="http://localhost:8000/vetprn_test/preceptorHandbook.php#collapseLogout">  Faculty : &nbsp;faculty <span class="caret"></span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="collapse" style="position: fixed;padding: 10px;z-index: 99999999;right: 0px;color: white;background: rgba(69, 86, 194, 0.76);top: 50px;" id="collapseLogout">
+      <ul class="list-group">
+                <!-- <li class="listGroupItemCopy "></li> -->       
+                                <li class="listGroupItemCopy"><a class="whiteColor form_font_heading navopt" href="http://localhost:8000/vetprn_test/pmpProfile.php">PROFILE</a></li>
+                              
+                            <li class="listGroupItemCopy"><a class="whiteColor form_font_heading navopt" href="http://localhost:8000/vetprn_test/pmpChangePassword.php">CHANGE PASSWORD</a></li>
+                                    <li class="listGroupItemCopy"><a class="whiteColor form_font_heading navopt" href="http://localhost:8000/vetprn_test/pmpLogout.php"><span class="glyphicon glyphicon-log-in"></span> LOGOUT </a></li>
+                          </ul>
+</div>
+<!-- <script type="text/javascript" src="./jsFiles/renderForms.js"></script> -->
+<script type="text/javascript">
+  $(function() {
+    $(".navbar-properties>.navbar-nav>li").click(function() {
+      // remove classes from all
+      $("li").removeClass("active");
+      // add class to the one we clicked
+      $(this).addClass("active");
+    });
+  });
+
+$(document).ready(function()
+ {
+   $("#main1").not("collapseLogout").click(function() {
+    console.log("inside logindiv not function");
+    $("#collapseLogout").removeClass("in");
+    }); 
+    // MAKE SURE YOUR SELECTOR MATCHES SOMETHING IN YOUR HTML!!!
+    //       $('#abc').qtip({
+    //       content:{
+    //       title: {text: 'hi hello'},
+    //       text: 'my qtip'
+    //       },
+    //       position: {
+    //       target: 'mouse', // Track the mouse as the positioning target
+    //       adjust: { x: 5, y: 5 } // Offset it slightly from under the mouse
+    //     }   
+    //  });
+ });
+ </script>
+   
+<div class="container-fluid" style="margin-top:50px;font-size:18px">
+<div class="text-align">   
+         <h2 style="color:#1a237e">Preceptor Handbook</h2>
+         <div class="col-sm-6 col-md-6">
+       
+              <div class="card">
+                    <div class="card-block" style="padding:1%">
+                      <h4 class="card-title">Flyer</h4>
+                      <p class="card-text"></p>
+                      <div>
+                          <object data="./Users_files/preceptor_handbook.pdf" type="application/pdf" style="width:100%;height:300px;">
+                              alt : <a href="./Users_files/preceptor_handbook.pdf">View</a>
+                          </object>
+                      </div>
+                      <a href="./Users_files/preceptor_handbook.pdf" download="" class="btn btn-primary">Download</a>
+                    </div>
+              </div>
+          </div>
+ </div> 
+ 
+  
+   
+     
+ 
+  <div id="schedule_event_modal" class="modal fade" role="dialog"></div>
+
+   <script type="text/javascript" src="./Users_files/datatables.min.js"></script>
+  <script src="./Users_files/jquery-ui.js"></script>
+    
+
+
+</div></div></body><span class="gr__tooltip"><span class="gr__tooltip-content"></span><i class="gr__tooltip-logo"></i><span class="gr__triangle"></span></span></html>

@@ -11,7 +11,10 @@ $useractivity = new ActivityHistory();
 $useractivity->saveHistory($conn, "Profile Page ", "Opened Profile Page");
 $uname = $_SESSION["username"];
 $uid = $_SESSION["userid"];
-
+if (!$_SESSION["loggedin"]) {
+    header("Location:./index.php");
+  }
+// var_dump($_SESSION);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fname = $_POST['f_name'];
     $lname = $_POST['l_name'];
@@ -60,10 +63,11 @@ if ($sql0_result == TRUE) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <!-- <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css">
- 
+  <script src="./scripts/animate.js" type="text/javascript"></script>
+
  <!-- Scripts By Self   -->
     <link rel="stylesheet" href="./cssstyles/style.css" />
          <script>

@@ -26,7 +26,8 @@ if (isset($_POST['fname']) && isset($_POST['lname'])&& isset($_POST['username'])
  
 		try{
 			// echo "testting";
-			$sql2 = "INSERT INTO  users (`fname`,`lname`, `password`,`username`,`phnum`, `email`, `age`, `gender`, `org`,`addr1`, `addr2`, `city`, `state`, `zip`) VALUES ('$first_name','$last_name','$pwd','$user_name', $phnum ,'$useremail',$role_id,'$gridRadio','$org','$addr1','$addr2','$city','$state',$zipcode)";			
+			$sql2 = "INSERT INTO  users (`fname`,`lname`, `password`,`username`,`phnum`, `email`, `age`, `gender`, `org`,`addr1`, `addr2`, `city`, `state`, `zip`) VALUES ('$first_name','$last_name','$pwd','$user_name', $phnum ,'$useremail',$role_id,'$gridRadio','$org','$addr1','$addr2','$city','$state',$zipcode)";
+			echo $sql2;			
 			$sql_result2 = $conn->query($sql2);
 			 if ($sql_result2 == TRUE)
 			 	{

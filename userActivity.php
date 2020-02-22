@@ -9,7 +9,9 @@ require("./connect.php");
 include("./services/saveUserActivityPdo.php");
 $useractivity = new ActivityHistory();
 $useractivity->saveHistory($conn, "User Activity", "Opened Activity Logs");
-  
+if (!$_SESSION["loggedin"]) {
+  header("Location:./index.php");
+}
 ?> 
 
 <!doctype html>
@@ -36,6 +38,8 @@ $useractivity->saveHistory($conn, "User Activity", "Opened Activity Logs");
   <!-- Scripts By Self -->
   <link rel="stylesheet" href="./cssstyles/style.css" />
     <script src="./scripts/login.js" type="text/javascript"></script>
+    <script src="./scripts/animate.js" type="text/javascript"></script>
+
   <script>
 var table;
     /* Formatting function for row details - modify as you need */
@@ -128,7 +132,7 @@ tr.shown td.details-control {
         <div class="d-flex h-100 text-center align-items-center">
           <div class="w-100 " >
           <h1 class="animationHeading">Activity Logs</h1>
-            <div class="card  border-success text-center">
+            <div class="card  border-success text-center" style="overflow-x: scroll;">
                 <!-- <div class="card-header activityHeader text-white"> -->
                 <ul class="nav nav-tabs">
                     <li class="nav-item">

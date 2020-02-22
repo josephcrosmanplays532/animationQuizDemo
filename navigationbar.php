@@ -4,9 +4,9 @@ if (!$_SESSION["loggedin"]) {
   <script src="./scripts/login.js" type="text/javascript"></script>
   <div class="topnav" id="myTopnav">
     <div><a href="./index.php" class="active">Animation Demo</a>
-        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <!-- <a href="javascript:void(0);" class="icon" onclick="myFunction()">
           <i class="fa fa-bars"></i>
-        </a>
+        </a> -->
     </div>
     <div class="topnav-right">
       <a id="loginDiv" data-toggle="collapse" href="#collapseLogin"> <span class="glyphicon glyphicon-log-in"></span> LOGIN
@@ -46,29 +46,29 @@ else
         
         <a href="./home.php" class="active">Home</a>
         <?php
-        if ($_SESSION["f2"]) {
+        if ($_SESSION["f1"]) {
         ?>
         <a href="./accessCtrl.php">Access Control</a>
         <?php
         }
-        if ($_SESSION["f3"]) {
+        if ($_SESSION["f2"]) {
         ?>
         <a href="./quizSubmissions.php"> Submissions</a>
         <?php
        }
-        if ($_SESSION["f4"]) {
+        if ($_SESSION["f3"]) {
         ?>
-        <a href="./UserActivity.php">User Activity</a>
+        <a href="./userActivity.php">User Activity</a>
         <?php
       }
         ?>
         <a href="./profile.php">Profile</a>
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-          <i class="glyphicon glyphicon-bars"></i>
+        <i class="fa fa-bars"></i>
         </a>  
     </div>
     <div class="topnav-right">
-        <a href="./logout.php">
+        <a href="./logout.php">LOGOUT
           <i class="fa fa-sign-out"></i>
         </a>
   </div>

@@ -33,6 +33,7 @@ if (!$_SESSION["loggedin"]) {
 
   <!-- Scripts By Self -->
   <!-- <script src="./scripts/login.js" type="text/javascript"></script> -->
+  <script src="./scripts/animate.js" type="text/javascript"></script>
 
   <link rel="stylesheet" href="./cssstyles/style.css" />
 </head>
@@ -45,77 +46,75 @@ if (!$_SESSION["loggedin"]) {
 
 
 <div class="container-fluid" >
-<div class="centerAlign">
-               <h2 class="animationHeading">
-                   Profile Details 
-                </h2>
-            </div>
-  <div class="card " >
-  <!-- Button trigger modal -->
-  <h1>
-  <form>
-  <div class="form-group row">
-      <label for="staticEmail"  style="margin-top: 30px;" class="col-sm-2 col-form-label">User</label>
-      <label for="staticEmail"  style="margin-top: 30px;" class="col-sm-6 col-form-label">Anusha matcha</label>
-    <div class="col-sm-4">
-    <button type="button" class="btn btn-primary" style="margin-top: 40px;" data-toggle="modal" data-target=".bd-example-modal-lg">
-  Open Feedback Form
-    </button>
+    <div class="centerAlign">
+        <h2 class="animationHeading">
+ Your Quiz Results
+        </h2>
     </div>
-  </label>
-  </form>
+    <div class="card ">
+      <form>
+        <div class="form-group row">
+          <div class = "col-sm-12 col-md-12">
+            <table class="table tabresponsive">
+                <thead>
+                    <tr>
+                        <th>Question Number</th>
+                        <th>Always</th>
+                        <th>Very Often</th>
+                        <th>Sometimes</th>
+                        <th>Almost Never</th>
+                        <th>Never(pops up)</th>
+                    </tr>
+                </thead>
+                <tbody id="pullquizans">
+                  <?php 
+                  $sql = "SELECT q.id,a.user_id, a.ans_value,a.timestamp FROM fb_qs as q LEFT JOIN fb_ans as a on q.id = a.q_id WHERE a.user_id = ?
+                  ";
+                  $stmt= $conn->prepare($sql);
+                  $stmt->execute([$_SESSION["userid"]]);
+                  $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
+                  if($result){
+                      // echo json_encode($result);
+                      foreach($result as $row){
+                        echo '<tr>';
+                        echo '<td>'.$row["id"].'</td>';
+                          if($row["ans_value"]=="Always"){
+                          echo '<td><label><input type="radio" disabled  name="optradio'.$row["id"].'" checked></label></td>';
+                          }else {
+                            echo '<td><label><input type="radio" disabled name="optradio'.$row["id"].'"></label></td>';
+                          }
+                         if($row["ans_value"]=="Very Often"){
+                          echo '<td><label><input type="radio"  disabled name="optradio'.$row["id"].'" checked></label></td>';
+                         }else {
+                           echo '<td><label><input type="radio"  disabled name="optradio'.$row["id"].'"></label></td>';
+                         }
+                         if($row["ans_value"]=="Sometimes"){
+                          echo '<td><label><input type="radio"  disabled name="optradio'.$row["id"].'" checked></label></td>';
+                         }else {
+                           echo '<td><label><input type="radio"  disabled name="optradio'.$row["id"].'"></label></td>';
+                         }
+                         if($row["ans_value"]=="Almost Never"){
+                          echo '<td><label><input type="radio"  disabled name="optradio'.$row["id"].'" checked></label></td>';
+                         }else {
+                           echo '<td><label><input type="radio"  disabled name="optradio'.$row["id"].'"> </label></td>';
+                         }
+                         if($row["ans_value"]=="Never"){
+                          echo '<td><label><input type="radio"  disabled name="optradio'.$row["id"].'" checked></label></td>';
+                         }else {
+                           echo '<td><label><input type="radio"  disabled name="optradio'.$row["id"].'"></label></td>';
+                         }
+                        echo '</tr>';
+                      }
+                      }
+                  ?>
 
-   
- </h1>
-
-  </div>
-</div>
-  
-
-<!-- Modal -->
-<div class="modal fade bd-example-modal-lg" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <div>
-  
-          <div class="card cardPadfb">
-            <p class="FBAUTO" id="1" name="1"> 1. The learning objectives for this module were met:</p>
-            <div class="row ">
-              <div class="col-sm-2 "><input class="FBAUTO" type="radio" name="1" value="Strongly Agree" required=""> Strongly Agree</div>
-              <div class="col-sm-2 "><input class="FBAUTO" type="radio" name="1" value="Agree" required=""> Agree</div>
-              <div class="col-sm-2 "><input class="FBAUTO" type="radio" name="1" value="Neutral" required=""> Neutral</div>
-              <div class="col-sm-2 "><input class="FBAUTO" type="radio" name="1" value="Disagree" required=""> Disagree</div>
-              <div class="col-sm-2 "><input class="FBAUTO" type="radio" name="1" value="Strongly Disagree" required=""> Strongly Disagree</div>
-            </div>
+                </tbody>
+            </table>
           </div>
-          <div class="card cardPadfb">
-            <p class="FBAUTO" id="2" name="2">2. The content for this module was presented clearly.</p>
-            <div class="row ">
-              <div class="col-sm-2 "><input class="FBAUTO" type="radio" name="2" value="Strongly Agree" required=""> Strongly Agree</div>
-              <div class="col-sm-2 "><input class="FBAUTO" type="radio" name="2" value="Agree" required=""> Agree</div>
-              <div class="col-sm-2 "><input class="FBAUTO" type="radio" name="2" value="Neutral" required=""> Neutral</div>
-              <div class="col-sm-2 "><input class="FBAUTO" type="radio" name="2" value="Disagree" required=""> Disagree</div>
-              <div class="col-sm-2 "><input class="FBAUTO" type="radio" name="2" value="Strongly Disagree" required=""> Strongly Disagree</div>
-            </div>
-          </div>
-  </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+        </div>
+      </form>
     </div>
-  </div>
 </div>
-  
-
 </body>
 
 </html>

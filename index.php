@@ -8,11 +8,14 @@ $connType="PDO";
 require("./connect.php");
 include("./services/saveUserActivityPdo.php");
 $useractivity = new ActivityHistory();
-
-  if (isset($_SESSION["userid"])) {
-    redirectBasedOnPermission($_SESSION["userid"], "home");
-    //header("Location:./home.php");
-  }
+if (isset($_SESSION["userid"])) {
+  header("Location:./home.php");
+}
+  // if (isset($_SESSION["userid"])) {
+  //   redirectBasedOnPermission($_SESSION["userid"], "home");
+  //   //header("Location:./home.php");
+  // }
+ 
   //Check if username is empty
    if ($_SERVER["REQUEST_METHOD"] == "POST"){
         if (empty(trim($_POST["username"]))) {
@@ -30,7 +33,7 @@ $useractivity = new ActivityHistory();
         // Validate credentials
   if (empty($username_err) && empty($password_err)) {
     // Prepare a select statement 
-    $sql = "SELECT u.id,u.fname,u.lname, u.username as username, u.password as password,u.email,ur.role_id,r.r_name,r.role_status as roleStatus FROM users u LEFT join pmp_user_role_mapping ur on u.id = ur.user_id left join pmp_role r on ur.role_id = r.role_id WHERE u.username = ?";
+    $sql = "SELECT u.id,u.fname,u.lname, u.username as username, u.password as password,u.quiz_status,u.email,ur.role_id,r.r_name,r.role_status as roleStatus FROM users u LEFT join pmp_user_role_mapping ur on u.id = ur.user_id left join pmp_role r on ur.role_id = r.role_id WHERE u.username = ?";
     //pass values to ? in sql statement to execute method
         try{
           $stmt= $conn->prepare($sql);
@@ -58,6 +61,7 @@ $useractivity = new ActivityHistory();
             $_SESSION["firstname1"] = $row["fname"];
             $_SESSION["lastname2"] = $row["lname"];
             $_SESSION["rname"] = $row["r_name"];
+            $_SESSION["quizStatus"] = $row["quiz_status"];
 
 
             try{
@@ -103,13 +107,10 @@ $useractivity = new ActivityHistory();
       }
     }else{
       echo "<script>alert('Username doesnot exist in Database');</script>";
-    }
-      
+    }     
   }
-}
-    
+} 
 ?> 
-
 <!doctype html>
 
 <html lang="en">
@@ -147,21 +148,21 @@ $useractivity = new ActivityHistory();
     require("./navigationbar.php");
     $regStatus = $_GET["regstat"];
     if($regStatus == "registered"){
-    ?>
+  ?>
     <script>swal("Registered Successfully!", "You can now login", "success");</script>
     <!-- <script>alert("successfully registered");</script> -->
     <?php
-      }
+      } 
     ?>
   
   <div id="main1">
     <header>
       <div class="overlay"></div>
-      <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"  style="height: 600px;
+      <!-- <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"  style="height: 600px;
         width: 100%;" >
         <source src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4" type="video/mp4">
-      </video>
-      <div class="container h-100">
+      </video> -->
+      <div class="container h-100" style="margin-top:250px">
         <div class="d-flex h-100 text-center align-items-center">
           <div class="w-100 " style="color:#e6550e">
           <h1 class="display-3">Video Playing Quiz</h1>

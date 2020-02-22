@@ -1,13 +1,13 @@
 <?php
-$servername = "mariadb";
-$username = "root";
-$password = "tiger";
-$dbname = "animationDemo";
+// $servername = "mariadb";
+// $username = "root";
+// $password = "tiger";
+// $dbname = "animationDemo";
 
-// $servername = "handson-mysql";
-// 	$username = "kumar";
-// 	$password = "kumar";
-// 	$dbname = "animationDemo";
+$servername = "handson-mysql";
+	$username = "kumar";
+	$password = "kumar";
+	$dbname = "animationDemo";
 
 	//Create connection
 	$conn = new mysqli($servername, $username, $password, $dbname);

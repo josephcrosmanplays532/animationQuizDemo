@@ -8,7 +8,7 @@ class ActivityHistory{
             $stmt->execute([NULL,$_SESSION["userid"],$event_type,$event_desc,session_id()]);
         }
         catch(Exception $e){
-            echo $e->getMessage();
+            // echo $e->getMessage();
         }
         
     }

@@ -1,22 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
--- https://www.phpmyadmin.net/
+-- version 4.4.6
+-- http://www.phpmyadmin.net
 --
--- Host: mariadb:3306
--- Generation Time: Feb 18, 2020 at 09:14 PM
--- Server version: 10.0.36-MariaDB-1~xenial
--- PHP Version: 7.4.1
+-- Host: localhost
+-- Generation Time: Feb 21, 2020 at 11:28 PM
+-- Server version: 10.0.36-MariaDB-1~trusty
+-- PHP Version: 5.5.9-1ubuntu4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `animationDemo`
@@ -25,29 +23,51 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `feedback_option`
+-- Table structure for table `fb_ans`
 --
 
-CREATE TABLE `feedback_option` (
-  `optid` int(11) NOT NULL,
-  `qid` int(11) NOT NULL,
-  `answer` varchar(200) NOT NULL,
-  `flag` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fb_ans` (
+  `id` int(11) NOT NULL,
+  `q_id` int(11) NOT NULL,
+  `user_id` int(20) NOT NULL,
+  `ans_value` varchar(50) NOT NULL,
+  `ans_flag` int(11) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fb_ans`
+--
+
+INSERT INTO `fb_ans` (`id`, `q_id`, `user_id`, `ans_value`, `ans_flag`, `timestamp`) VALUES
+(13, 1, 1, 'Almost Never', 1, '2020-02-20 17:26:15'),
+(14, 1, 1, 'Almost Never', 1, '2020-02-20 17:27:38'),
+(15, 2, 1, 'Never (pops up)', 1, '2020-02-20 17:29:38'),
+(16, 1, 1, 'Sometimes', 1, '2020-02-20 19:03:54'),
+(17, 2, 1, 'Almost Never', 1, '2020-02-20 19:04:04'),
+(18, 1, 94, 'Almost Never', 1, '2020-02-20 19:05:08'),
+(19, 2, 94, 'Almost Never', 1, '2020-02-20 19:05:14');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `feedback_quiz_qs`
+-- Table structure for table `fb_qs`
 --
 
-CREATE TABLE `feedback_quiz_qs` (
-  `q_id` int(11) NOT NULL,
-  `form_id` int(11) NOT NULL,
-  `question` varchar(500) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fb_qs` (
+  `id` int(11) NOT NULL,
+  `qurl` varchar(500) NOT NULL,
+  `all_option` varchar(500) NOT NULL,
   `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fb_qs`
+--
+
+INSERT INTO `fb_qs` (`id`, `qurl`, `all_option`, `time_stamp`) VALUES
+(1, 'intro.mp4', '', '2020-02-20 15:22:28'),
+(2, 'q1.mp4', '{"1": "Always", "2":"Very Often", "3":"Sometimes", "4":"Almost Never","5": "Never (pops up)"}', '2020-02-20 15:26:15');
 
 -- --------------------------------------------------------
 
@@ -55,12 +75,12 @@ CREATE TABLE `feedback_quiz_qs` (
 -- Table structure for table `pmp_feature`
 --
 
-CREATE TABLE `pmp_feature` (
+CREATE TABLE IF NOT EXISTS `pmp_feature` (
   `fid` int(20) NOT NULL COMMENT 'feature_ID',
   `feature_name` varchar(100) NOT NULL,
   `feature_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `feature_desc` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pmp_feature`
@@ -77,12 +97,12 @@ INSERT INTO `pmp_feature` (`fid`, `feature_name`, `feature_timestamp`, `feature_
 -- Table structure for table `pmp_role`
 --
 
-CREATE TABLE `pmp_role` (
+CREATE TABLE IF NOT EXISTS `pmp_role` (
   `role_id` int(10) NOT NULL,
   `r_name` varchar(255) NOT NULL,
   `role_status` varchar(1) NOT NULL,
   `role_time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pmp_role`
@@ -99,12 +119,12 @@ INSERT INTO `pmp_role` (`role_id`, `r_name`, `role_status`, `role_time_stamp`) V
 -- Table structure for table `pmp_role_feature_mapping`
 --
 
-CREATE TABLE `pmp_role_feature_mapping` (
+CREATE TABLE IF NOT EXISTS `pmp_role_feature_mapping` (
   `rf_id` int(100) NOT NULL,
   `r_id` int(100) NOT NULL,
   `fid` int(100) NOT NULL,
   `mapping_time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=716 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pmp_role_feature_mapping`
@@ -116,7 +136,7 @@ INSERT INTO `pmp_role_feature_mapping` (`rf_id`, `r_id`, `fid`, `mapping_time_st
 (708, 1, 2, '2020-02-17 16:27:48'),
 (709, 1, 3, '2020-02-17 16:27:48'),
 (710, 1, 4, '2020-02-17 16:27:48'),
-(711, 3, 2, '2020-02-17 16:28:17');
+(715, 3, 2, '2020-02-19 01:47:30');
 
 -- --------------------------------------------------------
 
@@ -124,13 +144,13 @@ INSERT INTO `pmp_role_feature_mapping` (`rf_id`, `r_id`, `fid`, `mapping_time_st
 -- Table structure for table `pmp_user_role_mapping`
 --
 
-CREATE TABLE `pmp_user_role_mapping` (
+CREATE TABLE IF NOT EXISTS `pmp_user_role_mapping` (
   `ur_id` int(15) NOT NULL,
   `user_id` int(15) NOT NULL,
   `role_id` int(15) NOT NULL,
   `user_role_status` int(1) NOT NULL DEFAULT '1' COMMENT 'enable -1 or disable-0',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pmp_user_role_mapping`
@@ -139,7 +159,9 @@ CREATE TABLE `pmp_user_role_mapping` (
 INSERT INTO `pmp_user_role_mapping` (`ur_id`, `user_id`, `role_id`, `user_role_status`, `create_date`) VALUES
 (1, 1, 1, 1, '2020-02-12 23:57:01'),
 (2, 2, 2, 1, '2020-02-15 21:48:21'),
-(3, 3, 3, 1, '2020-02-15 23:45:05');
+(3, 3, 3, 1, '2020-02-15 23:45:05'),
+(11, 94, 3, 1, '2020-02-18 23:56:18'),
+(12, 100, 1, 1, '2020-02-19 01:11:20');
 
 -- --------------------------------------------------------
 
@@ -147,13 +169,13 @@ INSERT INTO `pmp_user_role_mapping` (`ur_id`, `user_id`, `role_id`, `user_role_s
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL,
   `username` varchar(15) NOT NULL,
   `fname` varchar(30) NOT NULL,
   `lname` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `phnum` int(10) NOT NULL,
+  `phnum` bigint(10) NOT NULL,
   `email` varchar(50) NOT NULL,
   `age` int(3) NOT NULL,
   `gender` varchar(1) NOT NULL,
@@ -164,17 +186,20 @@ CREATE TABLE `users` (
   `city` varchar(255) NOT NULL,
   `state` varchar(30) NOT NULL,
   `zip` int(5) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `quiz_status` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `fname`, `lname`, `password`, `phnum`, `email`, `age`, `gender`, `org`, `role`, `addr1`, `addr2`, `city`, `state`, `zip`, `timestamp`) VALUES
-(1, 'anushamatcha', 'anusha', 'matcha', '$2y$10$HO1ejKVAL3Qq3biwOrnjeO3eBpE4OqcVn8WStFv9g2lav3ed5eIs.', 654, 'amatc001@odu.edu', 25, 'f', '', 'admin', 'line', 'line 2', 'virginia beach', 'va', 12345, '2020-02-12 21:58:00'),
-(2, 'preceptor', 'preceptor', 'john', '$2y$10$HO1ejKVAL3Qq3biwOrnjeO3eBpE4OqcVn8WStFv9g2lav3ed5eIs.', 1234567899, 'a@g.com', 12, 'o', 'wer', '', 'asfaf', 'afaf', 'afaf', 'AZ', 23345, '2020-02-13 14:05:37'),
-(3, 'faculty', 'faculty', 'linda', '$2y$10$wpbDsr2ke7SafkdnfJmfY.dL9RWK1uqykMfmkeCVMpVIxwqk.sIjm', 1234567892, 'a@re.co', 3, 'o', '', '', 'test address', 'address line 2', 'vatican', 'CA', 123421, '2020-02-15 23:45:05');
+INSERT INTO `users` (`id`, `username`, `fname`, `lname`, `password`, `phnum`, `email`, `age`, `gender`, `org`, `role`, `addr1`, `addr2`, `city`, `state`, `zip`, `timestamp`, `quiz_status`) VALUES
+(1, 'anushamatcha', 'anusha', 'matcha', '$2y$10$HO1ejKVAL3Qq3biwOrnjeO3eBpE4OqcVn8WStFv9g2lav3ed5eIs.', 654, 'amatc001@odu.edu', 25, 'f', '', 'admin', 'line', 'line 2', 'virginia beach', 'va', 12345, '2020-02-12 21:58:00', 0),
+(2, 'preceptor', 'preceptor', 'john', '$2y$10$HO1ejKVAL3Qq3biwOrnjeO3eBpE4OqcVn8WStFv9g2lav3ed5eIs.', 1234567899, 'a@g.com', 12, 'o', 'wer', '', 'asfaf', 'afaf', 'afaf', 'AZ', 23345, '2020-02-13 14:05:37', 0),
+(3, 'faculty', 'faculty', 'linda', '$2y$10$wpbDsr2ke7SafkdnfJmfY.dL9RWK1uqykMfmkeCVMpVIxwqk.sIjm', 1234567892, 'a@re.co', 3, 'o', '', '', 'test address', 'address line 2', 'vatican', 'CA', 123421, '2020-02-15 23:45:05', 0),
+(94, 'testfaculty', 'test', 'faculty', '$2y$10$P/h1PmSL/JiOZydCTjk7Y.qA/hrKX3VnVhX16DiYYIInGUMx69Kfm', 2147483647, 'anusha.m21@f.co', 3, 'o', 'jbhvg', '', 'adf', 'af', 'asasf', 'AK', 23456, '2020-02-18 23:56:18', 0),
+(100, 'testadmin', 'admin', 'test', '$2y$10$P/h1PmSL/JiOZydCTjk7Y.qA/hrKX3VnVhX16DiYYIInGUMx69Kfm', 32423, 'an@mg.com', 1, 'o', 'sdf', '', 'hmghn', 'nsdsf', 'vis', 'AK', 3333, '2020-02-19 01:11:20', 0);
 
 -- --------------------------------------------------------
 
@@ -182,14 +207,14 @@ INSERT INTO `users` (`id`, `username`, `fname`, `lname`, `password`, `phnum`, `e
 -- Table structure for table `user_activity_history`
 --
 
-CREATE TABLE `user_activity_history` (
+CREATE TABLE IF NOT EXISTS `user_activity_history` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `type` varchar(20) NOT NULL,
   `description` varchar(255) NOT NULL,
   `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `session_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=941 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user_activity_history`
@@ -325,17 +350,257 @@ INSERT INTO `user_activity_history` (`id`, `user_id`, `type`, `description`, `cr
 (703, 1, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-18 14:55:17', 2),
 (704, 1, 'Profile Page ', 'Opened Profile Page', '2020-02-18 14:55:18', 2),
 (705, 1, 'User Activity', 'Opened Activity Logs', '2020-02-18 14:55:20', 2),
-(706, 1, 'Access Control ', 'Opened Access Control', '2020-02-18 15:17:09', 2);
+(706, 1, 'Access Control ', 'Opened Access Control', '2020-02-18 15:17:09', 2),
+(707, 1, 'LOGIN', 'Just logged in', '2020-02-18 21:16:49', 2),
+(708, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-18 21:16:49', 2),
+(709, 1, 'Access Control ', 'Opened Access Control', '2020-02-18 21:16:53', 2),
+(710, 1, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-18 21:16:53', 2),
+(711, 1, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-18 21:16:57', 2),
+(712, 1, 'Profile Page ', 'Opened Profile Page', '2020-02-18 21:16:58', 2),
+(713, 1, 'Profile Page ', 'Opened Profile Page', '2020-02-18 21:17:01', 2),
+(714, 1, 'LOGIN', 'Just logged in', '2020-02-18 21:33:20', 2),
+(715, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-18 21:33:20', 2),
+(716, 1, 'Access Control ', 'Opened Access Control', '2020-02-18 21:33:31', 2),
+(717, 1, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-18 21:33:33', 2),
+(718, 1, 'Profile Page ', 'Opened Profile Page', '2020-02-18 21:33:34', 2),
+(719, 1, 'Profile Page ', 'Opened Profile Page', '2020-02-18 21:34:21', 2),
+(720, 1, 'Profile Page ', 'Opened Profile Page', '2020-02-18 21:34:22', 2),
+(721, 1, 'Profile Page ', 'Opened Profile Page', '2020-02-18 21:34:22', 2),
+(722, 1, 'Profile Page ', 'Opened Profile Page', '2020-02-18 21:34:28', 2),
+(723, 1, 'Profile Page ', 'Opened Profile Page', '2020-02-18 21:36:50', 2),
+(724, 1, 'Profile Page ', 'Opened Profile Page', '2020-02-18 21:37:50', 2),
+(725, 1, 'LOGIN', 'Just logged in', '2020-02-18 21:56:00', 0),
+(726, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-18 21:56:00', 0),
+(727, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-18 21:56:04', 0),
+(728, 1, 'LOGIN', 'Just logged in', '2020-02-18 21:57:09', 0),
+(729, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-18 21:57:09', 0),
+(730, 1, 'User Activity', 'Opened Activity Logs', '2020-02-18 21:57:12', 0),
+(731, 1, 'Access Control ', 'Opened Access Control', '2020-02-18 21:57:35', 0),
+(732, 1, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-18 21:57:37', 0),
+(733, 1, 'User Activity', 'Opened Activity Logs', '2020-02-18 21:57:39', 0),
+(734, 1, 'Profile Page ', 'Opened Profile Page', '2020-02-18 21:57:40', 0),
+(735, 1, 'User Activity', 'Opened Activity Logs', '2020-02-18 21:57:41', 0),
+(736, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-18 21:57:58', 0),
+(737, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-18 21:58:04', 0),
+(738, 1, 'Access Control ', 'Opened Access Control', '2020-02-18 21:58:07', 0),
+(739, 1, 'LOGIN', 'Just logged in', '2020-02-18 22:02:20', 0),
+(740, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-18 22:02:20', 0),
+(741, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-18 22:02:59', 0),
+(742, 1, 'LOGIN', 'Just logged in', '2020-02-18 22:03:08', 0),
+(743, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-18 22:03:08', 0),
+(744, 1, 'User Activity', 'Opened Activity Logs', '2020-02-18 22:33:45', 0),
+(745, 1, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-18 22:34:03', 0),
+(746, 1, 'Access Control ', 'Opened Access Control', '2020-02-18 22:34:12', 0),
+(747, 1, 'User Activity', 'Opened Activity Logs', '2020-02-18 22:34:15', 0),
+(748, 1, 'Profile Page ', 'Opened Profile Page', '2020-02-18 22:34:18', 0),
+(749, 3, 'LOGIN', 'Just logged in', '2020-02-18 22:34:27', 0),
+(750, 3, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-18 22:34:27', 0),
+(751, 3, 'Access Control ', 'Opened Access Control', '2020-02-18 22:34:33', 0),
+(752, 3, 'Profile Page ', 'Opened Profile Page', '2020-02-18 22:34:35', 0),
+(753, 1, 'LOGIN', 'Just logged in', '2020-02-18 22:34:43', 0),
+(754, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-18 22:34:43', 0),
+(755, 1, 'Access Control ', 'Opened Access Control', '2020-02-18 22:34:46', 0),
+(756, 3, 'LOGIN', 'Just logged in', '2020-02-18 22:35:16', 0),
+(757, 3, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-18 22:35:16', 0),
+(758, 3, 'Access Control ', 'Opened Access Control', '2020-02-18 22:35:20', 0),
+(759, 1, 'LOGIN', 'Just logged in', '2020-02-18 22:35:34', 0),
+(760, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-18 22:35:34', 0),
+(761, 1, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-18 22:35:38', 0),
+(762, 1, 'Access Control ', 'Opened Access Control', '2020-02-18 22:35:40', 0),
+(763, 3, 'LOGIN', 'Just logged in', '2020-02-18 22:36:04', 0),
+(764, 3, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-18 22:36:04', 0),
+(765, 1, 'LOGIN', 'Just logged in', '2020-02-18 23:01:17', 0),
+(766, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-18 23:01:17', 0),
+(767, 1, 'Access Control ', 'Opened Access Control', '2020-02-18 23:01:20', 0),
+(768, 1, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-18 23:01:21', 0),
+(769, 1, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-18 23:01:22', 0),
+(770, 1, 'User Activity', 'Opened Activity Logs', '2020-02-18 23:01:22', 0),
+(771, 1, 'Access Control ', 'Opened Access Control', '2020-02-18 23:01:23', 0),
+(772, 2, 'LOGIN', 'Just logged in', '2020-02-18 23:01:50', 0),
+(773, 2, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-18 23:01:50', 0),
+(774, 1, 'LOGIN', 'Just logged in', '2020-02-18 23:02:09', 0),
+(775, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-18 23:02:09', 0),
+(776, 1, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-18 23:02:19', 0),
+(777, 1, 'Access Control ', 'Opened Access Control', '2020-02-18 23:02:27', 0),
+(778, 1, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-18 23:02:33', 0),
+(779, 1, 'User Activity', 'Opened Activity Logs', '2020-02-18 23:02:38', 0),
+(780, 1, 'LOGIN', 'Just logged in', '2020-02-18 23:58:20', 0),
+(781, 1, 'LOGIN', 'Just logged in', '2020-02-18 23:58:44', 0),
+(782, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-18 23:58:44', 0),
+(783, 1, 'Access Control ', 'Opened Access Control', '2020-02-18 23:58:48', 0),
+(784, 1, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-18 23:58:51', 0),
+(785, 1, 'User Activity', 'Opened Activity Logs', '2020-02-18 23:58:53', 0),
+(786, 1, 'Profile Page ', 'Opened Profile Page', '2020-02-18 23:58:56', 0),
+(787, 94, 'LOGIN', 'Just logged in', '2020-02-19 00:00:44', 0),
+(788, 94, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 00:00:44', 0),
+(789, 100, 'LOGIN', 'Just logged in', '2020-02-19 01:11:44', 0),
+(790, 100, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 01:11:44', 0),
+(791, 100, 'Access Control ', 'Opened Access Control', '2020-02-19 01:11:48', 0),
+(792, 100, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-19 01:11:57', 0),
+(793, 100, 'LOGIN', 'Just logged in', '2020-02-19 01:13:14', 0),
+(794, 100, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 01:13:14', 0),
+(795, 94, 'LOGIN', 'Just logged in', '2020-02-19 01:14:16', 0),
+(796, 94, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 01:14:16', 0),
+(797, 94, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-19 01:14:19', 0),
+(798, 94, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 01:14:25', 0),
+(799, 94, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-19 01:14:25', 0),
+(800, 94, 'Profile Page ', 'Opened Profile Page', '2020-02-19 01:14:26', 0),
+(801, 94, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-19 01:14:28', 0),
+(802, 1, 'LOGIN', 'Just logged in', '2020-02-19 01:20:38', 0),
+(803, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 01:20:38', 0),
+(804, 1, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-19 01:22:43', 0),
+(805, 3, 'LOGIN', 'Just logged in', '2020-02-19 01:22:52', 0),
+(806, 3, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 01:22:52', 0),
+(807, 100, 'LOGIN', 'Just logged in', '2020-02-19 01:28:27', 0),
+(808, 100, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 01:28:27', 0),
+(809, 100, 'User Activity', 'Opened Activity Logs', '2020-02-19 01:28:51', 0),
+(810, 100, 'Access Control ', 'Opened Access Control', '2020-02-19 01:28:59', 0),
+(811, 100, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-19 01:29:06', 0),
+(812, 1, 'LOGIN', 'Just logged in', '2020-02-19 01:46:17', 0),
+(813, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 01:46:17', 0),
+(814, 1, 'Access Control ', 'Opened Access Control', '2020-02-19 01:46:19', 0),
+(815, 3, 'LOGIN', 'Just logged in', '2020-02-19 01:46:41', 0),
+(816, 3, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 01:46:41', 0),
+(817, 3, 'User Activity', 'Opened Activity Logs', '2020-02-19 01:46:46', 0),
+(818, 3, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-19 01:46:47', 0),
+(819, 3, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 01:46:52', 0),
+(820, 3, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-19 01:46:53', 0),
+(821, 3, 'User Activity', 'Opened Activity Logs', '2020-02-19 01:46:54', 0),
+(822, 3, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-19 01:46:55', 0),
+(823, 3, 'User Activity', 'Opened Activity Logs', '2020-02-19 01:46:56', 0),
+(824, 3, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-19 01:47:00', 0),
+(825, 3, 'User Activity', 'Opened Activity Logs', '2020-02-19 01:47:01', 0),
+(826, 3, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-19 01:47:02', 0),
+(827, 3, 'User Activity', 'Opened Activity Logs', '2020-02-19 01:47:02', 0),
+(828, 3, 'Profile Page ', 'Opened Profile Page', '2020-02-19 01:47:05', 0),
+(829, 3, 'User Activity', 'Opened Activity Logs', '2020-02-19 01:47:07', 0),
+(830, 1, 'LOGIN', 'Just logged in', '2020-02-19 01:47:20', 0),
+(831, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 01:47:20', 0),
+(832, 1, 'User Activity', 'Opened Activity Logs', '2020-02-19 01:47:22', 0),
+(833, 1, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-19 01:47:23', 0),
+(834, 1, 'Access Control ', 'Opened Access Control', '2020-02-19 01:47:25', 0),
+(835, 3, 'LOGIN', 'Just logged in', '2020-02-19 01:47:41', 0),
+(836, 3, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 01:47:41', 0),
+(837, 100, 'LOGIN', 'Just logged in', '2020-02-19 20:06:02', 22),
+(838, 100, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 20:06:02', 22),
+(839, 100, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-19 20:07:48', 22),
+(840, 100, 'Access Control ', 'Opened Access Control', '2020-02-19 20:08:00', 22),
+(841, 100, 'User Activity', 'Opened Activity Logs', '2020-02-19 20:08:02', 22),
+(842, 100, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 20:09:59', 22),
+(843, 100, 'LOGIN', 'Just logged in', '2020-02-19 20:10:53', 22),
+(844, 100, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 20:10:53', 22),
+(845, 100, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 20:11:39', 22),
+(846, 100, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 20:12:19', 22),
+(847, 3, 'LOGIN', 'Just logged in', '2020-02-19 20:14:21', 0),
+(848, 3, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 20:14:21', 0),
+(849, 1, 'LOGIN', 'Just logged in', '2020-02-19 20:52:48', 0),
+(850, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 20:52:48', 0),
+(851, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 21:05:52', 0),
+(852, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 21:07:37', 0),
+(853, 1, 'LOGIN', 'Just logged in', '2020-02-19 21:08:36', 0),
+(854, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 21:08:36', 0),
+(855, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 21:09:14', 0),
+(856, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 21:09:20', 0),
+(857, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 21:09:21', 0),
+(858, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 21:11:35', 0),
+(859, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 21:11:37', 0),
+(860, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 21:12:50', 0),
+(861, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 21:17:21', 0),
+(862, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 21:17:29', 0),
+(863, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 21:18:11', 0),
+(864, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 21:18:31', 0),
+(865, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 21:19:30', 0),
+(866, 94, 'LOGIN', 'Just logged in', '2020-02-19 21:51:07', 0),
+(867, 94, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 21:51:07', 0),
+(868, 94, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-19 21:53:05', 0),
+(869, 94, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-19 21:53:19', 0),
+(870, 94, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-19 21:53:20', 0),
+(871, 94, 'Profile Page ', 'Opened Profile Page', '2020-02-19 21:53:22', 0),
+(872, 100, 'LOGIN', 'Just logged in', '2020-02-19 21:53:51', 0),
+(873, 100, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 21:53:51', 0),
+(874, 100, 'Access Control ', 'Opened Access Control', '2020-02-19 21:55:13', 0),
+(875, 100, 'Access Control ', 'Opened Access Control', '2020-02-19 21:56:13', 0),
+(876, 100, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-19 21:56:15', 0),
+(877, 100, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-19 21:56:32', 0),
+(878, 100, 'User Activity', 'Opened Activity Logs', '2020-02-19 21:56:33', 0),
+(879, 100, 'Profile Page ', 'Opened Profile Page', '2020-02-19 21:56:45', 0),
+(880, 100, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-19 21:56:54', 0),
+(881, 1, 'LOGIN', 'Just logged in', '2020-02-19 23:11:06', 0),
+(882, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 23:11:06', 0),
+(883, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 23:16:28', 0),
+(884, 1, 'LOGIN', 'Just logged in', '2020-02-19 23:29:57', 0),
+(885, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 23:29:57', 0),
+(886, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 23:32:09', 0),
+(887, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 23:34:22', 0),
+(888, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 23:39:57', 0),
+(889, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 23:41:28', 0),
+(890, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 23:47:26', 0),
+(891, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 23:50:43', 0),
+(892, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 23:50:43', 0),
+(893, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 23:50:44', 0),
+(894, 1, 'Profile Page ', 'Opened Profile Page', '2020-02-19 23:50:47', 0),
+(895, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 23:50:49', 0),
+(896, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-19 23:53:27', 0),
+(897, 1, 'LOGIN', 'Just logged in', '2020-02-20 03:45:08', 0),
+(898, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-20 03:45:08', 0),
+(899, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-20 03:48:19', 0),
+(900, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-20 03:49:58', 0),
+(901, 1, 'LOGIN', 'Just logged in', '2020-02-20 03:59:32', 0),
+(902, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-20 03:59:32', 0),
+(903, 1, 'Profile Page ', 'Opened Profile Page', '2020-02-20 03:59:38', 0),
+(904, 1, 'User Activity', 'Opened Activity Logs', '2020-02-20 03:59:40', 0),
+(905, 1, 'User Activity', 'Opened Activity Logs', '2020-02-20 04:00:45', 0),
+(906, 1, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-20 04:00:47', 0),
+(907, 1, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-20 04:01:11', 0),
+(908, 1, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-20 04:01:51', 0),
+(909, 1, 'LOGIN', 'Just logged in', '2020-02-20 04:04:23', 0),
+(910, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-20 04:04:23', 0),
+(911, 1, 'Profile Page ', 'Opened Profile Page', '2020-02-20 04:04:25', 0),
+(912, 94, 'LOGIN', 'Just logged in', '2020-02-20 15:21:15', 0),
+(913, 94, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-20 15:21:15', 0),
+(914, 1, 'LOGIN', 'Just logged in', '2020-02-20 19:01:02', 0),
+(915, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-20 19:01:02', 0),
+(916, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-20 19:03:20', 0),
+(917, 1, 'LOGIN', 'Just logged in', '2020-02-20 19:03:28', 0),
+(918, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-20 19:03:28', 0),
+(919, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-20 19:04:04', 0),
+(920, 1, 'LOGIN', 'Just logged in', '2020-02-20 19:04:12', 0),
+(921, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-20 19:04:12', 0),
+(922, 94, 'LOGIN', 'Just logged in', '2020-02-20 19:04:54', 0),
+(923, 94, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-20 19:04:54', 0),
+(924, 94, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-20 19:05:14', 0),
+(925, 94, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-20 19:06:54', 0),
+(926, 94, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-20 19:06:55', 0),
+(927, 94, 'LOGIN', 'Just logged in', '2020-02-20 19:12:54', 0),
+(928, 94, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-20 19:12:54', 0),
+(929, 94, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-20 19:13:21', 0),
+(930, 1, 'LOGIN', 'Just logged in', '2020-02-20 19:13:36', 0),
+(931, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-20 19:13:36', 0),
+(932, 94, 'LOGIN', 'Just logged in', '2020-02-20 19:14:50', 0),
+(933, 94, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-20 19:14:50', 0),
+(934, 1, 'LOGIN', 'Just logged in', '2020-02-20 23:09:38', 0),
+(935, 1, 'Home', 'Opened Home Page with Quiz vedio1', '2020-02-20 23:09:38', 0),
+(936, 1, 'Access Control ', 'Opened Access Control', '2020-02-20 23:09:40', 0),
+(937, 1, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-20 23:09:43', 0),
+(938, 1, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-20 23:16:44', 0),
+(939, 1, 'User Activity', 'Opened Activity Logs', '2020-02-20 23:16:46', 0),
+(940, 1, 'Quiz Feedback', 'Opened Quiz Feedback', '2020-02-20 23:16:47', 0);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `feedback_quiz_qs`
+-- Indexes for table `fb_ans`
 --
-ALTER TABLE `feedback_quiz_qs`
-  ADD PRIMARY KEY (`q_id`);
+ALTER TABLE `fb_ans`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fb_qs`
+--
+ALTER TABLE `fb_qs`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `pmp_feature`
@@ -382,48 +647,45 @@ ALTER TABLE `user_activity_history`
 --
 
 --
--- AUTO_INCREMENT for table `feedback_quiz_qs`
+-- AUTO_INCREMENT for table `fb_ans`
 --
-ALTER TABLE `feedback_quiz_qs`
-  MODIFY `q_id` int(11) NOT NULL AUTO_INCREMENT;
-
+ALTER TABLE `fb_ans`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+--
+-- AUTO_INCREMENT for table `fb_qs`
+--
+ALTER TABLE `fb_qs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `pmp_feature`
 --
 ALTER TABLE `pmp_feature`
-  MODIFY `fid` int(20) NOT NULL AUTO_INCREMENT COMMENT 'feature_ID', AUTO_INCREMENT=19;
-
+  MODIFY `fid` int(20) NOT NULL AUTO_INCREMENT COMMENT 'feature_ID',AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `pmp_role`
 --
 ALTER TABLE `pmp_role`
-  MODIFY `role_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
+  MODIFY `role_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `pmp_role_feature_mapping`
 --
 ALTER TABLE `pmp_role_feature_mapping`
-  MODIFY `rf_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=712;
-
+  MODIFY `rf_id` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=716;
 --
 -- AUTO_INCREMENT for table `pmp_user_role_mapping`
 --
 ALTER TABLE `pmp_user_role_mapping`
-  MODIFY `ur_id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
+  MODIFY `ur_id` int(15) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=101;
 --
 -- AUTO_INCREMENT for table `user_activity_history`
 --
 ALTER TABLE `user_activity_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=707;
-COMMIT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=941;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

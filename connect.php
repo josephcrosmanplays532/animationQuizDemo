@@ -1,13 +1,13 @@
 <?php
-$servername = "mariadb";
-$username = "root";
-$password = "tiger";
-$dbname = "animationDemo";
+// $servername = "mariadb";
+// $username = "root";
+// $password = "tiger";
+// $dbname = "animationDemo";
 
-// $servername = "handson-mysql";
-// 	$username = "kumar";
-// 	$password = "kumar";
-// 	$dbname = "animationDemo";
+$servername = "handson-mysql";
+	$username = "kumar";
+	$password = "kumar";
+	$dbname = "animationDemo";
 
 if(isset($connType) && $connType=="PDO"){
   $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
