@@ -1,6 +1,4 @@
-
 var currentQuestionIndex = 0;
-var enableNext = function(){}
 
 $(document).ready(function () {
   playQuestion();
@@ -129,9 +127,8 @@ function playQuestion() {
     $("#saveAndNext").hide();
   }
   // console.log(currentQuestionIndex + "is the cirrent index");
-// $(".modal-title").html(  " Select your option for" + currentQuestionIndex+ " Question");
-$(".modal-title").html("Select your option below");
-$("#optionsHolder").html(optionsContent);
+$(".modal-title").html( currentQuestionIndex+ " currentQuestionIndex");
+  $("#optionsHolder").html(optionsContent);
 }
 //Responsive code Hamberger Menu
 function myFunction() {

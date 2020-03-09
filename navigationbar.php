@@ -29,9 +29,12 @@ if (!$_SESSION["loggedin"]) {
           </div>
           <div style="text-align:center">
             <button type="submit" id="loginBtn" class="btn btn-success"><span class="glyphicon glyphicon-log-in"></span> Login</button>
+            <div><a href="./registration.php" style="color:blue; float:right; padding:8px;">Not a member? Register Here</a></div>
+          <div><a href="./forgotPassword.php" style="color:orange; float:right; padding:8px;">Forgot password</a></div>
+
           </div>
           <!-- <button id="loginBtn" type="submit" class="btn"><span class="glyphicon glyphicon-log-in"></span> Login</button> <br> -->
-          <a href="./registration.php" style="color:blue; float:right; padding:8px;">Not a member? Register Here</a>
+       
         </form>
       </div>
     </div>

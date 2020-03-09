@@ -35,7 +35,8 @@
   }
   .topnav a.active {
     background-color: #4CAF50;
-    color: white;
+    /* background-color: #EDCD1F; */
+    color:white;
   }
   
   .topnav .icon {
@@ -100,6 +101,11 @@
 .modal-dialog {
   max-width: 80%; 
 }
+
+}
+
+.redColor{
+  color: #d9534f;
 
 }
 

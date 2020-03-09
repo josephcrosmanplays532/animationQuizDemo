@@ -4,7 +4,7 @@
 // $password = "tiger";
 // $dbname = "animationDemo";
 
-$servername = "handson-mysql";
+    $servername = "handson-mysql";
 	$username = "kumar";
 	$password = "kumar";
 	$dbname = "animationDemo";
